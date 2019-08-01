@@ -1,0 +1,9 @@
+.search-filters {
+    background: #E8F8F5;
+    padding: 8px;
+}
+
+.search-filters input[type=text] {
+    width: 150px;
+    padding: 4px 6px;
+}

@@ -1,0 +1,14 @@
+.add-todo {
+    background: #EAF2F8;
+    padding: 8px;
+}
+
+.add-todo input[type=text] {
+    width: 150px;
+    padding: 4px 6px;
+}
+
+.add-todo button {
+    margin-left: 2px;
+    padding: 4px 6px;
+}

@@ -1,0 +1,19 @@
+
+.visibility-filters {
+    background: #FDF2E9;
+    padding: 8px;
+}
+
+.filter {
+    margin: 2px 6px;
+    color: #6C3483;
+}
+.filter:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: black;
+}
+
+.filter-active {
+    border-bottom: 2px solid #EB984E;
+}
