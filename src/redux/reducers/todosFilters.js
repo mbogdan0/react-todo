@@ -15,14 +15,17 @@ const todosFilters = (state = initialState, action) =>
             case SET_SEARCH: {
                 const { term } = action.payload;
                 draft.searchTerm = term;
-                break;
+                return draft;
             }
 
             case SET_FILTER: {
                 const { searchFilter } = action.payload;
                 draft.searchFilter = searchFilter;
-                break;
+                return draft;
             }
+
+            default:
+                return draft;
 
         }
 

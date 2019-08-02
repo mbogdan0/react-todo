@@ -1,27 +1,32 @@
 import React from "react";
 import {getSearchFilter} from "../../redux/selectors";
-import { connect } from "react-redux";
-import {setSearch} from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import {SET_SEARCH} from "../../redux/actionTypes";
+
 import "./SearchFilters.css";
 
-const SearchFilters = ({ searchFilter, setSearch }) => {
+const SearchFilters = () => {
+
+    const searchFilter = useSelector(getSearchFilter);
+    const dispatch = useDispatch();
+
+    const handleChangeFilter = (e) => dispatch({
+        type: SET_SEARCH,
+        payload: {
+            term: e.target.value
+        }
+    });
+
     return (
         <div className="search-filters">
             <input
                 type="text"
                 placeholder="Поиск"
-                value={searchFilter}
-                onChange={e => setSearch(e.target.value)}
+                defaultValue={searchFilter}
+                onChange={handleChangeFilter}
             />
         </div>
     );
 };
 
-const mapStateToProps = state => {
-  const searchFilter = getSearchFilter(state);
-  return { searchFilter };
-};
-
-export default connect(
-    mapStateToProps, { setSearch }
-)(SearchFilters);
+export default SearchFilters;
