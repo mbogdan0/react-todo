@@ -1,41 +1,45 @@
 import React from "react";
 import cx from "classnames";
-import { connect } from "react-redux";
-import { setFilter } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 import { VISIBILITY_FILTERS } from "../../constants";
-import "./VisibilityFilters.css";
 import {getVisibilityFilter} from "../../redux/selectors";
+import {SET_FILTER} from "../../redux/actionTypes";
 
-const VisibilityFilters = ({ activeFilter, setFilter }) => {
+import "./VisibilityFilters.css";
+
+
+const VisibilityFilters = () => {
+
+    const activeFilter = useSelector(getVisibilityFilter);
+    const dispatch = useDispatch();
+
+    const filterList = Object.keys(VISIBILITY_FILTERS).map(item => {
+        const filter = VISIBILITY_FILTERS[item];
+
+        const handleClick = () => dispatch({
+            type: SET_FILTER,
+            payload: { searchFilter: filter }
+        });
+
+        return (
+            <span
+                key={filter}
+                className={cx(
+                    "filter",
+                    filter === activeFilter && "filter-active"
+                )}
+                onClick={handleClick}
+            >
+                {filter}
+            </span>
+        );
+    });
+
     return (
         <div className="visibility-filters">
-            {Object.keys(VISIBILITY_FILTERS).map(filterKey => {
-                const currentFilter = VISIBILITY_FILTERS[filterKey];
-                return (
-                    <span
-                        key={`visibility-filter-${currentFilter}`}
-                        className={cx(
-                            "filter",
-                            currentFilter === activeFilter && "filter-active"
-                        )}
-                        onClick={() => {
-                            setFilter(currentFilter);
-                        }}
-                    >
-            {currentFilter}
-          </span>
-                );
-            })}
+            {filterList}
         </div>
     );
 };
 
-const mapStateToProps = state => {
-    const activeFilter = getVisibilityFilter(state);
-    return { activeFilter };
-};
-
-export default connect(
-    mapStateToProps,
-    { setFilter }
-)(VisibilityFilters);
+export default VisibilityFilters;

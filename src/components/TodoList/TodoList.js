@@ -1,24 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, {Fragment} from "react";
+import { useSelector } from "react-redux";
 import Todo from "../Todo/Todo";
 import {getFilteredTodos} from "../../redux/selectors";
 import "./TodoList.css";
 
+const TodoList = () => {
+    const todos = useSelector(getFilteredTodos);
 
-const TodoList = ({ todos }) => (
-    <ul className="todo-list">
-        {todos && todos.length
-            ? todos.map((todo) => {
-                return <Todo key={`todo-${todo.id}`} todo={todo} />;
-            })
-            : "No todos, yay!"}
-    </ul>
-);
+    const hasTodos = todos && todos.length > 0;
+    const todoList = hasTodos && todos.map(todo => <Todo key={todo.id} todo={todo} />);
 
-
-const mapStateToProps = state => {
-    const todos = getFilteredTodos(state);
-    return { todos };
+    return (<Fragment>{hasTodos ?
+        <ul className="todo-list">
+            {todoList}
+        </ul> : <div className="empty-list">Empty list</div>
+    }</Fragment>);
 };
 
-export default connect(mapStateToProps)(TodoList);
+export default TodoList;

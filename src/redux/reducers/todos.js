@@ -1,4 +1,4 @@
-import { TOGGLE_TODO, ADD_TODO } from "../actionTypes";
+import {TOGGLE_TODO, ADD_TODO, DELETE_TODO} from "../actionTypes";
 import produce from "immer";
 
 const initialState = [
@@ -15,7 +15,7 @@ const todosReducer = (state = initialState, action) =>
                 const { id, content } = action.payload;
                 const newObj = { id, content, completed: false };
                 draft.push(newObj);
-                break;
+                return draft;
             }
 
             case TOGGLE_TODO: {
@@ -26,9 +26,17 @@ const todosReducer = (state = initialState, action) =>
                     }
                     return item;
                 });
-                break;
+                return draft;
             }
 
+            case DELETE_TODO: {
+                const { todoId } = action.payload;
+                draft.splice(draft.findIndex(todo => todo.id === todoId), 1);
+                return draft;
+            }
+
+            default:
+                return draft;
         }
     });
 
