@@ -1,12 +1,16 @@
 import { VISIBILITY_FILTERS } from "../constants";
 import { createSelector } from 'reselect';
 
-export const getTodos = store => store.todos;
+export const getTodos = store => store.todos.data;
 
 export const getSearchFilter = store => store.todosFilters.searchTerm;
 
 export const getVisibilityFilter = store => store.todosFilters.searchFilter;
 
+export const getStateTodos = store => {
+    const {data, ...state} = store.todos;
+    return state;
+};
 
 export const getTodosByVisibilityFilter = createSelector(
     getTodos,
