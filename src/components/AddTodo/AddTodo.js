@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {ADD_TODO} from "../../redux/actionTypes";
-
+import {addTodo} from "../../redux/actions";
 import "./AddTodo.css";
+
 
 const AddTodo = () => {
 
@@ -10,13 +10,7 @@ const AddTodo = () => {
     const dispatch = useDispatch();
 
     const handleAddTodo = () => {
-        dispatch({
-            type: ADD_TODO,
-            payload: {
-                id: Date.now(),
-                content: value
-            }
-        });
+        dispatch(addTodo(value));
         setValue('');
     };
 

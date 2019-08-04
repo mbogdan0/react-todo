@@ -1,7 +1,7 @@
 import React from "react";
 import {getSearchFilter} from "../../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
-import {SET_SEARCH} from "../../redux/actionTypes";
+import {setSearch} from "../../redux/actions";
 
 import "./SearchFilters.css";
 
@@ -10,12 +10,7 @@ const SearchFilters = () => {
     const searchFilter = useSelector(getSearchFilter);
     const dispatch = useDispatch();
 
-    const handleChangeFilter = (e) => dispatch({
-        type: SET_SEARCH,
-        payload: {
-            term: e.target.value
-        }
-    });
+    const handleChangeFilter = (e) => dispatch(setSearch(e.target.value));
 
     return (
         <div className="search-filters">

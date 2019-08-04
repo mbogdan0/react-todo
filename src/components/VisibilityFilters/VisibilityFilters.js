@@ -3,10 +3,9 @@ import cx from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { VISIBILITY_FILTERS } from "../../constants";
 import {getVisibilityFilter} from "../../redux/selectors";
-import {SET_FILTER} from "../../redux/actionTypes";
+import {setFilter} from "../../redux/actions";
 
 import "./VisibilityFilters.css";
-
 
 const VisibilityFilters = () => {
 
@@ -16,10 +15,7 @@ const VisibilityFilters = () => {
     const filterList = Object.keys(VISIBILITY_FILTERS).map(item => {
         const filter = VISIBILITY_FILTERS[item];
 
-        const handleClick = () => dispatch({
-            type: SET_FILTER,
-            payload: { searchFilter: filter }
-        });
+        const handleClick = () => dispatch(setFilter(filter));
 
         return (
             <span

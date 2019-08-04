@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import {DELETE_TODO} from "../../../redux/actionTypes";
+import {deleteTodo} from "../../../redux/actions";
 
 const TodoDelete = ({ todoId }) => {
 
     const dispatch = useDispatch();
-    const handleDelete = () => dispatch({type: DELETE_TODO, payload: {todoId}});
+    const handleDelete = () => dispatch(deleteTodo(todoId));
 
     return (
       <span onClick={handleDelete}>
