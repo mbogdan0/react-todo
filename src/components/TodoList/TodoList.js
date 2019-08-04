@@ -16,7 +16,6 @@ const TodoList = () => {
     }, []);
 
 
-
     const hasTodos = todos && todos.length > 0;
     const todoList = hasTodos && todos.map(todo => <Todo key={todo.id} todo={todo} />);
 
